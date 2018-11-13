@@ -5,6 +5,7 @@
  * Created on November 12, 2018, 6:03 PM
  */
 
+// TEST ON
 
 #include "xc.h"
 #include <stdio.h>
@@ -17,6 +18,7 @@ int main(void)
 {
     //initialise all necessary modules
     gpIOSetup();
+    random();
 
     //Timer1_Setup();
 
