@@ -30,3 +30,5 @@ int main(void)
 
 //test branching
 //test branch on master
+
+//merging action from branch to master
