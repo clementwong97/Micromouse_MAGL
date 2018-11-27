@@ -4,8 +4,8 @@
  * Created : 27 November 2018
  */
 #include "xc.h"
-#ifndef LAB5_IOsetup_H
-#define	LAB5_IOsetup_H
+#ifndef IOSETUP_H
+#define	IOSETUP_H
 //LED2 
 #define LED2L   LATDbits.LATD1
 #define LED2P   PORTDbits.RD1 
@@ -23,5 +23,5 @@
 #define S3P PORTDbits.RD2
 #define S3T TRISDbits.TRISD2
 void IOSetup(void);
-#endif	/*LAB5_IOHEADER_H*/
+#endif	/*IOSETUP_H*/
 

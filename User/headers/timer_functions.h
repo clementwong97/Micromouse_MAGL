@@ -4,7 +4,7 @@
  * Created : 27 November 2018
  */
 #include "xc.h"
-#ifndef XC_TIMER1_H
-#define	XC_TIMER1_H
+#ifndef TIMER_H
+#define	TIMER_H
 void timer1(void); //Function Prototype
-#endif	/* XC_TIMER1_H */
+#endif	/* TIMER_H */

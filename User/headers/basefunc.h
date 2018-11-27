@@ -4,8 +4,8 @@
  * Created : 27 November 2018
  */
 #include "xc.h"
-#ifndef LAB5_basefunc_H
-#define	LAB5_basefunc_H /* Base Functions */
+#ifndef BASEFUNC_H
+#define	BASEFUNC_H 
 
 void myDelay(unsigned int); //Prototype
 int Debounce(int*);
