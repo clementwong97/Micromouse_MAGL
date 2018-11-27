@@ -1,12 +1,11 @@
 /* 
- * File:   PWMsetup.h
- * Author: kieraneasdale
- *
- * Created on November 15, 2018, 2:43 PM
+ * File    : PWMsetup.h
+ * Author  : K.Easdale & H.Wong
+ * Created : 27 November 2018
  */
 #include "xc.h"
-#ifndef PWMSETUP_H
-#define	PWMSETUP_H
+#ifndef PWMsetup_H
+#define	PWMsetup_H
 void PWMsetup(void);
 void Dutycycle(int);
 #endif	/* PWMSETUP_H */

@@ -1,10 +1,10 @@
 /*
- * File:   BaseFunc.c
- * Author: Kieran Easdale
+ * File:   basefunc.c
+ * Author: Kieran Easdale & H.Wong
  * Created on 27 Nov
  */
-#include "LAB6_header_EX3.h"
-#include "LAB6_IOSetup_EX3.h"
+#include "basefunc.h"
+#include "IOSetup.h"
 #include "xc.h"
 void myDelay(unsigned int timeInMilliseconds)
 {

@@ -1,11 +1,10 @@
 /*
- * File:   IOSetup.c
- * Author: Kieran Easdale
- *
- * Created on October 18, 2018, 2:34 PM
+ * File:   UART.c
+ * Author: Kieran Easdale & H.Wong
+ * Created on 27 Nov
  */
-#include "LAB6_UART_EX3.h"
-#include "LAB6_IOSetup_EX3.h"
+#include "UART.h"
+#include "IOsetup.h"
 #include "xc.h"
 void UART2setup(void) 
 {

@@ -1,10 +1,9 @@
 /*
  * File:   PWMsetup.c
- * Author: kieraneasdale
- *
- * Created on November 1, 2018, 3:34 PM
+ * Author: Kieran Easdale & H.Wong
+ * Created on 27 Nov
  */
-#include "LAB6_PWMsetup_EX3.h"
+#include "PWMsetup.h"
 #include "xc.h"
 #include <math.h>
 #define pi 3.1415926

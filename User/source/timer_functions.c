@@ -1,12 +1,11 @@
 /*
- * File:   LAB4_Timer1Functions_EX4.c
- * Author: kieraneasdale
- *
- * Created on November 1, 2018, 3:34 PM
+ * File:   timer_functions.c
+ * Author: Kieran Easdale & H.Wong
+ * Created on 27 Nov
  */
-#include "LAB6_Timer1Functions_EX3.h"
-#include "LAB6_IOSetup_EX3.h"
-#include "LAB6_PWMsetup_EX3.h"
+#include "LAB6_timerfunctions.h"
+#include "IOsetup.h"
+#include "PWMsetup.h"
 #include "xc.h"
 
 void timer1(void) {

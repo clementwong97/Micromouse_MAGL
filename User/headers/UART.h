@@ -1,12 +1,11 @@
 /* 
- * File:   LAB6_UART_EX3.h
- * Author: kieraneasdale
- *
- * Created on November 22, 2018, 3:33 PM
+ * File    : UART.h
+ * Author  : K.Easdale & H.Wong
+ * Created : 27 November 2018
  */
 #include "xc.h"
-#ifndef LAB6_UART_EX3_H
-#define	LAB6_UART_EX3_H
+#ifndef LAB6_UART_H
+#define	LAB6_UART_H
 void UART2setup(void);
 #endif	/* LAB6_UART_EX3_H */
 

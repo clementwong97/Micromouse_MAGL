@@ -1,12 +1,11 @@
 /* 
- * File:   
- * Author: 
- * Comments:
- * Revision history: 
+ * File    : IOsetup.h
+ * Author  : K.Easdale & H.Wong
+ * Created : 27 November 2018
  */
 #include "xc.h"
-#ifndef LAB5_IOHEADER_H
-#define	LAB5_IOHEADER_H
+#ifndef LAB5_IOsetup_H
+#define	LAB5_IOsetup_H
 //LED2 
 #define LED2L   LATDbits.LATD1
 #define LED2P   PORTDbits.RD1 
