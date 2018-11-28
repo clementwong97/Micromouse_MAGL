@@ -7,10 +7,10 @@
 #include "xc.h"
 void IOSetup(void) 
 {
-    LED2T = 0;
-    LED3T = 0;
-    LED4T = 0;
-    S3T = 1;
+	LED2T = 0;
+	LED3T = 0;
+	LED4T = 0;
+	S3T = 1;
 }
 
 
