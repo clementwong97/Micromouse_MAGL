@@ -72,3 +72,10 @@ struct maze_storage
 	bool east_wall[6][8];
 	bool north_wall[6][8];
 };
+
+struct node
+{
+	int current_posX;
+	int current_posY;
+	int lowest_neigh;
+};
