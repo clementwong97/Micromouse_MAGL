@@ -138,7 +138,7 @@ void check_sensors(struct maze_storage *wall_sensors, struct node *n_sensors)
 	printf("current_posX: %d\n", n_sensors->current_posX);
 	printf("current_posY: %d\n", n_sensors->current_posY);
 
-	printf("Where is the wall? [E,N,S,W] (1 means wall present, 0 means clear path) \n");
+	printf("Where is the wall?  (E N S W) (1 means wall present, 0 means clear path), for example input the wall status like: 0 1 1 1 \n");
 	scanf("%d %d %d %d", &wall_sensors->east_wall[n_y][n_x], &wall_sensors->north_wall[n_y][n_x], &wall_sensors->south_wall[n_y][n_x], &wall_sensors->west_wall[n_y][n_x]);
 
 	// //sample sensors values, when at (0,0)
@@ -301,7 +301,7 @@ void move_lowest_cell(struct maze_storage *lowest, struct node *n_lowest)
 void track_position(struct maze_storage *track, struct node *n_track)
 {
 	//eg. current position at [5][0]
-	printf("Enter the current position of mouse [y][x]: ");
+	printf("Enter the current position of mouse [y][x] For example: 5 0 : ");
 	scanf("%d %d", &n_track->current_posY, &n_track->current_posX);
 	printf("Current position is at [%d][%d]\n", n_track->current_posY, n_track->current_posX);
 	// n_track->current_posX = 0;
