@@ -231,6 +231,8 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check)
 					{
 						//move to East Cell
 						printf("Move to East Cell. \n");
+						n_check->current_posX++;;
+						printf("New Location: [%d][%d]\n", n_check->current_posY, n_check->current_posX);
 					}
 				}
 			}
@@ -242,6 +244,8 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check)
 					{
 						//move to West Cell
 						printf("Move to West Cell. \n");
+						n_check->current_posX--;
+						printf("New Location: [%d][%d]\n", n_check->current_posY, n_check->current_posX);
 					}
 				}
 			}
@@ -253,6 +257,8 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check)
 					{
 						//move to South Cell
 						printf("Move to South Cell. \n");
+						n_check->current_posY++;
+						printf("New Location: [%d][%d]\n", n_check->current_posY, n_check->current_posX);
 					}
 				}
 			}
@@ -264,6 +270,8 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check)
 					{
 						//move to North Cell
 						printf("Move to North Cell. \n");
+						n_check->current_posY--;
+						printf("New Location: [%d][%d]\n", n_check->current_posY, n_check->current_posX);
 					}
 				}
 			}
@@ -276,6 +284,8 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check)
 			{
 				//move to East Cell
 				printf("Move to East Cell. \n");
+				n_check->current_posX++;;
+				printf("New Location: [%d][%d]\n", n_check->current_posY, n_check->current_posX);
 			}
 		}
 		else if (check->temp_node_S < check->temp_node_N)
@@ -284,6 +294,8 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check)
 			{
 				//move to South Cell
 				printf("Move to South Cell. \n");
+				n_check->current_posY++;
+				printf("New Location: [%d][%d]\n", n_check->current_posY, n_check->current_posX);
 			}
 		}
 		else if (check->temp_node_N <= check->temp_node_E)
@@ -292,6 +304,8 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check)
 			{
 				//move to North Cell
 				printf("Move to North Cell. \n");
+				n_check->current_posY--;
+				printf("New Location: [%d][%d]\n", n_check->current_posY, n_check->current_posX);
 			}
 		}
 	}
@@ -303,6 +317,8 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check)
 			{
 				//move to East Cell
 				printf("Move to East Cell. \n");
+				n_check->current_posX++;
+				printf("New Location: [%d][%d]\n", n_check->current_posY, n_check->current_posX);
 			}
 		}
 		if (check->temp_node_W < check->temp_node_N)
@@ -311,6 +327,8 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check)
 			{
 				//move to West Cell
 				printf("Move to West Cell. \n");
+				n_check->current_posX--;
+				printf("New Location: [%d][%d]\n", n_check->current_posY, n_check->current_posX);
 			}
 		}
 		if (check->temp_node_N <= check->temp_node_E)
@@ -319,6 +337,8 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check)
 			{
 				//move to North Cell
 				printf("Move to North Cell. \n");
+				n_check->current_posY--;
+				printf("New Location: [%d][%d]\n", n_check->current_posY, n_check->current_posX);
 			}
 		}
 	}
@@ -328,11 +348,15 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check)
 		{
 			//move to North Cell
 			printf("Move to North Cell. \n");
+			n_check->current_posY--;
+			printf("New Location: [%d][%d]\n", n_check->current_posY, n_check->current_posX);
 		}
 		if (check->temp_node_E < check->temp_node_N)
 		{
 			//move to East Cell
 			printf("Move to East Cell. \n");
+			n_check->current_posX++;
+			printf("New Location: [%d][%d]\n", n_check->current_posY, n_check->current_posX);
 		}
 	}
 	else if (check->status_wall == WALL_ESW)
@@ -343,6 +367,8 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check)
 			{
 				//move to East Cell
 				printf("Move to East Cell. \n");
+				n_check->current_posX++;
+				printf("New Location: [%d][%d]\n", n_check->current_posY, n_check->current_posX);
 			}
 		}
 		if (check->temp_node_W < check->temp_node_S)
@@ -351,6 +377,8 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check)
 			{
 				//move to West Cell
 				printf("Move to West Cell. \n");
+				n_check->current_posX--;
+				printf("New Location: [%d][%d]\n", n_check->current_posY, n_check->current_posX);
 			}
 		}
 		if (check->temp_node_S < check->temp_node_E)
@@ -359,6 +387,8 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check)
 			{
 				//move to South Cell
 				printf("Move to South Cell. \n");
+				n_check->current_posY++;
+				printf("New Location: [%d][%d]\n", n_check->current_posY, n_check->current_posX);
 			}
 		}
 	}
@@ -368,12 +398,16 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check)
 		{
 			//move to East Cell
 			printf("Move to East Cell. \n");
+			n_check->current_posX++;
+			printf("New Location: [%d][%d]\n", n_check->current_posY, n_check->current_posX);
 		
 		}
 		if (check->temp_node_S < check->temp_node_E)
 		{
 			//move to South Cell
 			printf("Move to South Cell. \n");
+			n_check->current_posY++;
+			printf("New Location: [%d][%d]\n", n_check->current_posY, n_check->current_posX);
 		}
 	}
 	else if (check->status_wall == WALL_EW)
@@ -382,12 +416,16 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check)
 		{
 			//move to East Cell
 			printf("Move to East Cell. \n");
+			n_check->current_posX++;
+			printf("New Location: [%d][%d]\n", n_check->current_posY, n_check->current_posX);
 		
 		}
 		if (check->temp_node_W < check->temp_node_E)
 		{
 			//move to West Cell
 			printf("Move to West Cell. \n");
+			n_check->current_posX--;
+			printf("New Location: [%d][%d]\n", n_check->current_posY, n_check->current_posX);
 		}
 	}
 	else if (check->status_wall == WALL_NSW)
@@ -398,6 +436,8 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check)
 			{
 				//move to North Cell
 				printf("Move to North Cell. \n");
+				n_check->current_posY--;
+				printf("New Location: [%d][%d]\n", n_check->current_posY, n_check->current_posX);
 			}
 		}
 		if (check->temp_node_W < check->temp_node_S)
@@ -406,6 +446,8 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check)
 			{
 				//move to South Cell
 				printf("Move to West Cell. \n");
+				n_check->current_posX--;
+				printf("New Location: [%d][%d]\n", n_check->current_posY, n_check->current_posX);
 			}
 		}
 		if (check->temp_node_S < check->temp_node_N)
@@ -414,6 +456,8 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check)
 			{
 				//move to North Cell
 				printf("Move to South Cell. \n");
+				n_check->current_posY++;
+				printf("New Location: [%d][%d]\n", n_check->current_posY, n_check->current_posX);
 			}
 		}
 	}
@@ -423,12 +467,16 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check)
 		{
 			//move to North Cell
 			printf("Move to North Cell. \n");
+			n_check->current_posY--;
+			printf("New Location: [%d][%d]\n", n_check->current_posY, n_check->current_posX);
 		
 		}
 		if (check->temp_node_S < check->temp_node_N)
 		{
 			//move to South Cell
 			printf("Move to South Cell. \n");
+			n_check->current_posY++;
+			printf("New Location: [%d][%d]\n", n_check->current_posY, n_check->current_posX);
 		}
 	}
 	else if (check->status_wall == WALL_NW)
@@ -437,12 +485,16 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check)
 		{
 			//move to North Cell
 			printf("Move to North Cell. \n");
+			n_check->current_posY--;
+			printf("New Location: [%d][%d]\n", n_check->current_posY, n_check->current_posX);
 		
 		}
 		if (check->temp_node_W < check->temp_node_N)
 		{
 			//move to West Cell
 			printf("Move to West Cell. \n");
+			n_check->current_posX--;
+			printf("New Location: [%d][%d]\n", n_check->current_posY, n_check->current_posX);
 		}
 	}
 	else if (check->status_wall == WALL_SW)
@@ -451,11 +503,16 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check)
 		{
 			//move to West Cell
 			printf("Move to West Cell. \n");
+			n_check->current_posX--;
+			printf("New Location: [%d][%d]\n", n_check->current_posY, n_check->current_posX);
+
 		}
 		if (check->temp_node_S < check->temp_node_W)
 		{
 			//move to south cell
 			printf("Move to South Cell. \n");
+			n_check->current_posY++;
+			printf("New Location: [%d][%d]\n", n_check->current_posY, n_check->current_posX);
 		}
 	}
 
@@ -464,9 +521,9 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check)
 void track_position(struct maze_storage *track, struct node *n_track)
 {
 	//eg. current position at [5][0]
-	printf("Enter the current position of mouse [y][x] For example: 5 0 : ");
+	printf("Enter the initial position of mouse [y][x] For example: 5 0 : ");
 	scanf("%d %d", &n_track->current_posY, &n_track->current_posX);
-	printf("Current position is at [%d][%d]\n", n_track->current_posY, n_track->current_posX);
+	printf("Initial position is at [%d][%d]\n", n_track->current_posY, n_track->current_posX);
 	// n_track->current_posX = 0;
 	// n_track->current_posY = 5;
 
@@ -550,7 +607,11 @@ void next_move(struct maze_storage *next, struct node *n_next)
 				{
 					//clear on E
 					//Move to East
-					printf("Robot move to the East. \n");
+					printf("Move to the East. \n");
+					current_x++;
+					n_next->current_posX = current_x;
+					n_next->current_posY = current_y;
+					printf("New Location: [%d][%d]\n", n_next->current_posY, n_next->current_posX);
 				}
 				
 			}
@@ -571,7 +632,6 @@ void next_move(struct maze_storage *next, struct node *n_next)
 				}
 				else if (next->west_wall[current_y][current_x])
 				{
-					printf("Debug: Check..\n");
 					//if clear on the N, S
 					//Check North, South cell values
 					next->status_wall = WALL_NS;
@@ -591,7 +651,11 @@ void next_move(struct maze_storage *next, struct node *n_next)
 				{
 					//if clear on the N
 					//Move to the North
-					printf("Robot move to the North. \n");
+					printf("Move to the North. \n");
+					current_y--;
+					n_next->current_posX = current_x;
+					n_next->current_posY = current_y;
+					printf("New Location: [%d][%d]\n", n_next->current_posY, n_next->current_posX);
 				}
 			}	
 		}
@@ -610,7 +674,11 @@ void next_move(struct maze_storage *next, struct node *n_next)
 				{
 					//if clear on the S
 					//Move to the South
-					printf("Robot move to the South. \n");
+					printf("Move to the South. \n");
+					current_y++;
+					n_next->current_posX = current_x;
+					n_next->current_posY = current_y;
+					printf("New Location: [%d][%d]\n", n_next->current_posY, n_next->current_posX);
 				}	
 			}
 			else if (next->south_wall[current_y][current_x])
@@ -619,7 +687,11 @@ void next_move(struct maze_storage *next, struct node *n_next)
 				{
 					//if clear on the W
 					//move to west
-					printf("Robot move to the West. \n");
+					printf("Move to the West. \n");
+					current_x--;
+					n_next->current_posX = current_x;
+					n_next->current_posY = current_y;
+					printf("New Location: [%d][%d]\n", n_next->current_posY, n_next->current_posX);
 				}
 			}
 		}
@@ -636,25 +708,29 @@ int main(void)
 	printf("Check Main \n");
 
 	cell_data.status_wall = 0;
-
+	
 	//function to track the real time coordinates of the node
 	track_position(&cell_data, &node_data);
 
-	//function to store the initial maze data
-	store_maze_data(&cell_data);
+	while (1)
+	{
+		//function to store the initial maze data
+		store_maze_data(&cell_data);
 
-	//function to convert sensors reading to algorithm
-	check_sensors(&cell_data, &node_data);
+		//function to convert sensors reading to algorithm
+		check_sensors(&cell_data, &node_data);
 
-	//function to check the cell paths
-	check_walls(&cell_data, &node_data);
+		//function to check the cell paths
+		check_walls(&cell_data, &node_data);
 
-	// //function to move the mouse to the lowest distance value
-	// move_lowest_cell(&cell_data, &node_data);
+		// //function to move the mouse to the lowest distance value
+		// move_lowest_cell(&cell_data, &node_data);
 
-	//function to compare the wall status and lowest distance value
-	next_move(&cell_data, &node_data);
+		//function to compare the wall status and lowest distance value
+		next_move(&cell_data, &node_data);
 
+		printf("Current cell value: %d\n", cell_data.maze_value[node_data.current_posY][node_data.current_posX]);
+	}
 
 	return 0;
 }
