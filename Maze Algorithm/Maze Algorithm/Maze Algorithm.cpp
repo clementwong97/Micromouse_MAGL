@@ -220,11 +220,9 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check)
 	printf("Check wall and value.........\n");
 	fix_maze_dimension(check, n_check);
 
-	switch (check->status_wall)
+	if (check->status_wall == WALL_NO)
 	{
-		case WALL_NO:
-		{
-			//compare and find the smallest of them all
+		//compare and find the smallest of them all
 			if (check->temp_node_E < check->temp_node_N)
 			{
 				if (check->temp_node_E < check->temp_node_W)
@@ -236,18 +234,18 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check)
 					}
 				}
 			}
-			if (check->temp_node_W < check->temp_node_N)
+			else if (check->temp_node_W < check->temp_node_N)
 			{
-				if (check->temp_node_W <= check->temp_node_E)
+				if (check->temp_node_W < check->temp_node_E)
 				{
-					if (check->temp_node_W <= check->temp_node_S)
+					if (check->temp_node_W < check->temp_node_S)
 					{
 						//move to West Cell
 						printf("Move to West Cell. \n");
 					}
 				}
 			}
-			if (check->temp_node_S < check->temp_node_N)
+			else if (check->temp_node_S < check->temp_node_N)
 			{
 				if (check->temp_node_S < check->temp_node_W)
 				{
@@ -258,7 +256,7 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check)
 					}
 				}
 			}
-			if (check->temp_node_N <= check->temp_node_E)
+			else if (check->temp_node_N <= check->temp_node_E)
 			{
 				if (check->temp_node_N <= check->temp_node_W)
 				{
@@ -269,201 +267,198 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check)
 					}
 				}
 			}
-		}
-		case WALL_ENS:
+	}
+	else if (check->status_wall == WALL_ENS)
+	{
+		if (check->temp_node_E < check->temp_node_N)
 		{
-			if (check->temp_node_E < check->temp_node_N)
-			{
-				if (check->temp_node_E < check->temp_node_S)
-				{
-					//move to East Cell
-					printf("Move to East Cell. \n");
-				}
-			}
-			if (check->temp_node_S < check->temp_node_N)
-			{
-				if (check->temp_node_S < check->temp_node_E)
-				{
-					//move to South Cell
-					printf("Move to South Cell. \n");
-				}
-			}
-			if (check->temp_node_N <= check->temp_node_E)
-			{
-				if (check->temp_node_N <= check->temp_node_S)
-				{
-					//move to North Cell
-					printf("Move to North Cell. \n");
-				}
-			}
-		}
-		case WALL_ENW:
-		{
-			if (check->temp_node_E < check->temp_node_N)
-			{
-				if (check->temp_node_E < check->temp_node_W)
-				{
-					//move to East Cell
-					printf("Move to East Cell. \n");
-				}
-			}
-			if (check->temp_node_W < check->temp_node_N)
-			{
-				if (check->temp_node_W < check->temp_node_E)
-				{
-					//move to West Cell
-					printf("Move to West Cell. \n");
-				}
-			}
-			if (check->temp_node_N <= check->temp_node_E)
-			{
-				if (check->temp_node_N <= check->temp_node_W)
-				{
-					//move to North Cell
-					printf("Move to North Cell. \n");
-				}
-			}
-		}
-		case WALL_EN:
-		{
-			if (check->temp_node_E < check->temp_node_N)
+			if (check->temp_node_E < check->temp_node_S)
 			{
 				//move to East Cell
 				printf("Move to East Cell. \n");
-			
-			}
-			if (check->temp_node_N <= check->temp_node_E)
-			{
-				//move to North Cell
-				printf("Move to North Cell. \n");
 			}
 		}
-		case WALL_ESW:
+		else if (check->temp_node_S < check->temp_node_N)
 		{
-			if (check->temp_node_E <= check->temp_node_S)
-			{
-				if (check->temp_node_E <= check->temp_node_W)
-				{
-					//move to East Cell
-					printf("Move to East Cell. \n");
-				}
-			}
-			if (check->temp_node_W < check->temp_node_S)
-			{
-				if (check->temp_node_W < check->temp_node_E)
-				{
-					//move to West Cell
-					printf("Move to West Cell. \n");
-				}
-			}
-			if (check->temp_node_S < check->temp_node_E)
-			{
-				if (check->temp_node_S < check->temp_node_W)
-				{
-					//move to South Cell
-					printf("Move to South Cell. \n");
-				}
-			}
-		}
-		case WALL_ES:
-		{
-			if (check->temp_node_E <= check->temp_node_S)
-			{
-				//move to East Cell
-				printf("Move to East Cell. \n");
-			
-			}
 			if (check->temp_node_S < check->temp_node_E)
 			{
 				//move to South Cell
 				printf("Move to South Cell. \n");
 			}
 		}
-		case WALL_EW:
+		else if (check->temp_node_N <= check->temp_node_E)
 		{
-			if (check->temp_node_E <= check->temp_node_W)
+			if (check->temp_node_N <= check->temp_node_S)
+			{
+				//move to North Cell
+				printf("Move to North Cell. \n");
+			}
+		}
+	}
+	else if (check->status_wall == WALL_ENW)
+	{
+		if (check->temp_node_E < check->temp_node_N)
+		{
+			if (check->temp_node_E < check->temp_node_W)
 			{
 				//move to East Cell
 				printf("Move to East Cell. \n");
-			
 			}
+		}
+		if (check->temp_node_W < check->temp_node_N)
+		{
 			if (check->temp_node_W < check->temp_node_E)
 			{
 				//move to West Cell
 				printf("Move to West Cell. \n");
 			}
 		}
-		case WALL_NSW:
-		{
-			if (check->temp_node_N <= check->temp_node_S)
-			{
-				if (check->temp_node_N <= check->temp_node_W)
-				{
-					//move to North Cell
-					printf("Move to North Cell. \n");
-				}
-			}
-			if (check->temp_node_W < check->temp_node_S)
-			{
-				if (check->temp_node_W < check->temp_node_N)
-				{
-					//move to South Cell
-					printf("Move to West Cell. \n");
-				}
-			}
-			if (check->temp_node_S < check->temp_node_N)
-			{
-				if (check->temp_node_S < check->temp_node_W)
-				{
-					//move to North Cell
-					printf("Move to South Cell. \n");
-				}
-			}
-		}
-		case WALL_NS:
-		{
-			if (check->temp_node_N <= check->temp_node_S)
-			{
-				//move to North Cell
-				printf("Move to North Cell. \n");
-			
-			}
-			if (check->temp_node_S < check->temp_node_N)
-			{
-				//move to South Cell
-				printf("Move to South Cell. \n");
-			}
-		}
-		case WALL_NW:
+		if (check->temp_node_N <= check->temp_node_E)
 		{
 			if (check->temp_node_N <= check->temp_node_W)
 			{
 				//move to North Cell
 				printf("Move to North Cell. \n");
-			
 			}
-			if (check->temp_node_W < check->temp_node_N)
+		}
+	}
+	else if (check->status_wall == WALL_EN)
+	{
+		if (check->temp_node_N <= check->temp_node_E)
+		{
+			//move to North Cell
+			printf("Move to North Cell. \n");
+		}
+		if (check->temp_node_E < check->temp_node_N)
+		{
+			//move to East Cell
+			printf("Move to East Cell. \n");
+		}
+	}
+	else if (check->status_wall == WALL_ESW)
+	{
+		if (check->temp_node_E <= check->temp_node_S)
+		{
+			if (check->temp_node_E <= check->temp_node_W)
+			{
+				//move to East Cell
+				printf("Move to East Cell. \n");
+			}
+		}
+		if (check->temp_node_W < check->temp_node_S)
+		{
+			if (check->temp_node_W < check->temp_node_E)
 			{
 				//move to West Cell
 				printf("Move to West Cell. \n");
 			}
 		}
-		case WALL_SW:
+		if (check->temp_node_S < check->temp_node_E)
 		{
 			if (check->temp_node_S < check->temp_node_W)
 			{
 				//move to South Cell
 				printf("Move to South Cell. \n");
-			
 			}
-			if (check->temp_node_W <= check->temp_node_S)
+		}
+	}
+	else if (check->status_wall == WALL_ES)
+	{
+		if (check->temp_node_E <= check->temp_node_S)
+		{
+			//move to East Cell
+			printf("Move to East Cell. \n");
+		
+		}
+		if (check->temp_node_S < check->temp_node_E)
+		{
+			//move to South Cell
+			printf("Move to South Cell. \n");
+		}
+	}
+	else if (check->status_wall == WALL_EW)
+	{
+		if (check->temp_node_E <= check->temp_node_W)
+		{
+			//move to East Cell
+			printf("Move to East Cell. \n");
+		
+		}
+		if (check->temp_node_W < check->temp_node_E)
+		{
+			//move to West Cell
+			printf("Move to West Cell. \n");
+		}
+	}
+	else if (check->status_wall == WALL_NSW)
+	{
+		if (check->temp_node_N <= check->temp_node_S)
+		{
+			if (check->temp_node_N <= check->temp_node_W)
 			{
-				//move to West Cell
+				//move to North Cell
+				printf("Move to North Cell. \n");
+			}
+		}
+		if (check->temp_node_W < check->temp_node_S)
+		{
+			if (check->temp_node_W < check->temp_node_N)
+			{
+				//move to South Cell
 				printf("Move to West Cell. \n");
 			}
 		}
-
+		if (check->temp_node_S < check->temp_node_N)
+		{
+			if (check->temp_node_S < check->temp_node_W)
+			{
+				//move to North Cell
+				printf("Move to South Cell. \n");
+			}
+		}
 	}
+	else if (check->status_wall == WALL_NS)
+	{
+		if (check->temp_node_N <= check->temp_node_S)
+		{
+			//move to North Cell
+			printf("Move to North Cell. \n");
+		
+		}
+		if (check->temp_node_S < check->temp_node_N)
+		{
+			//move to South Cell
+			printf("Move to South Cell. \n");
+		}
+	}
+	else if (check->status_wall == WALL_NW)
+	{
+		if (check->temp_node_N <= check->temp_node_W)
+		{
+			//move to North Cell
+			printf("Move to North Cell. \n");
+		
+		}
+		if (check->temp_node_W < check->temp_node_N)
+		{
+			//move to West Cell
+			printf("Move to West Cell. \n");
+		}
+	}
+	else if (check->status_wall == WALL_SW)
+	{
+		if (check->temp_node_W <= check->temp_node_S)
+		{
+			//move to West Cell
+			printf("Move to West Cell. \n");
+		}
+		if (check->temp_node_S < check->temp_node_W)
+		{
+			//move to south cell
+			printf("Move to South Cell. \n");
+		}
+	}
+
 }
 
 void track_position(struct maze_storage *track, struct node *n_track)
@@ -497,7 +492,7 @@ void next_move(struct maze_storage *next, struct node *n_next)
 					next->status_wall = WALL_NO;
 					check_wall_and_value(next, n_next);
 				}
-				else
+				else if (next->west_wall[current_y][current_x])
 				{
 					//if clear on the E, N, S
 					//Check East, North, South cell values
@@ -505,7 +500,7 @@ void next_move(struct maze_storage *next, struct node *n_next)
 					check_wall_and_value(next, n_next);
 				}		
 			}
-			else
+			else if (next->south_wall[current_y][current_x])
 			{
 				if (!(next->west_wall[current_y][current_x]))
 				{
@@ -514,7 +509,7 @@ void next_move(struct maze_storage *next, struct node *n_next)
 					next->status_wall = WALL_ENW;
 					check_wall_and_value(next, n_next);
 				}
-				else
+				else if (next->west_wall[current_y][current_x])
 				{
 					//if clear on the E, N
 					//Check East, North cell values
@@ -523,7 +518,7 @@ void next_move(struct maze_storage *next, struct node *n_next)
 				}
 			}	
 		}
-		else
+		else if (next->north_wall[current_y][current_x])
 		{
 			if (!(next->south_wall[current_y][current_x]))
 			{
@@ -534,7 +529,7 @@ void next_move(struct maze_storage *next, struct node *n_next)
 					next->status_wall = WALL_ESW;
 					check_wall_and_value(next, n_next);
 				}
-				else
+				else if (next->west_wall[current_y][current_x])
 				{
 					//if clear on the E, S
 					//Check East, South cell values
@@ -542,7 +537,7 @@ void next_move(struct maze_storage *next, struct node *n_next)
 					check_wall_and_value(next, n_next);
 				}	
 			}
-			else
+			else if (next->south_wall[current_y][current_x])
 			{
 				if (!(next->west_wall[current_y][current_x]))
 				{
@@ -551,7 +546,7 @@ void next_move(struct maze_storage *next, struct node *n_next)
 					next->status_wall = WALL_EW;
 					check_wall_and_value(next, n_next);
 				}
-				else
+				else if (next->west_wall[current_y][current_x])
 				{
 					//clear on E
 					//Move to East
@@ -574,15 +569,16 @@ void next_move(struct maze_storage *next, struct node *n_next)
 					next->status_wall = WALL_NSW;
 					check_wall_and_value(next, n_next);
 				}
-				else
+				else if (next->west_wall[current_y][current_x])
 				{
+					printf("Debug: Check..\n");
 					//if clear on the N, S
 					//Check North, South cell values
 					next->status_wall = WALL_NS;
 					check_wall_and_value(next, n_next);
 				}		
 			}
-			else
+			else if (next->south_wall[current_y][current_x])
 			{
 				if (!(next->west_wall[current_y][current_x]))
 				{
@@ -591,7 +587,7 @@ void next_move(struct maze_storage *next, struct node *n_next)
 					next->status_wall = WALL_NW;
 					check_wall_and_value(next, n_next);
 				}
-				else
+				else if (next->west_wall[current_y][current_x])
 				{
 					//if clear on the N
 					//Move to the North
@@ -599,7 +595,7 @@ void next_move(struct maze_storage *next, struct node *n_next)
 				}
 			}	
 		}
-		else
+		else if (next->north_wall[current_y][current_x])
 		{
 			if (!(next->south_wall[current_y][current_x]))
 			{
@@ -610,14 +606,14 @@ void next_move(struct maze_storage *next, struct node *n_next)
 					next->status_wall = WALL_SW;
 					check_wall_and_value(next, n_next);
 				}
-				else
+				else if (next->west_wall[current_y][current_x])
 				{
 					//if clear on the S
 					//Move to the South
 					printf("Robot move to the South. \n");
 				}	
 			}
-			else
+			else if (next->south_wall[current_y][current_x])
 			{
 				if (!(next->west_wall[current_y][current_x]))
 				{
@@ -638,6 +634,8 @@ int main(void)
 	struct node node_data;
 
 	printf("Check Main \n");
+
+	cell_data.status_wall = 0;
 
 	//function to track the real time coordinates of the node
 	track_position(&cell_data, &node_data);
