@@ -13,10 +13,17 @@
 /*   N(0)
 W(3)  E(1)
 S(2)  */
-#define NORTH_WALL 0
-#define EAST_WALL  1
-#define SOUTH_WALL 2
-#define WEST_WALL  3
+#define WALL_NO  0
+#define WALL_ENS 1
+#define WALL_ENW 2
+#define WALL_EN  3
+#define WALL_ESW 4
+#define WALL_ES  5
+#define WALL_EW  6
+#define WALL_NSW 7
+#define WALL_NS  8
+#define WALL_NW  9
+#define WALL_SW  10
 
 // typedef struct node
 // {
@@ -67,10 +74,15 @@ int temp_cell_data [6][8] =
 struct maze_storage
 {
 	int maze_value[6][8];
+	int temp_node_N;
+	int temp_node_E;
+	int temp_node_S;
+	int temp_node_W;
 	bool west_wall[6][8];
 	bool south_wall[6][8];
 	bool east_wall[6][8];
 	bool north_wall[6][8];
+	int status_wall;
 };
 
 struct node
