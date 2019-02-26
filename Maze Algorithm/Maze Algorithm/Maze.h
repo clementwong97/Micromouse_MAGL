@@ -63,17 +63,28 @@ int temp_cell_data [6][8] =
 
 };
 
-// struct wall_directions
-// {
-// 	bool west_wall[6][8];
-// 	bool south_wall[6][8];
-// 	bool east_wall[6][8];
-// 	bool north_wall[6][8];
-// };
+int flag_data [6][8] =
+{
+	{0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0},
+	{0, 0, 0, 0, 0, 0, 0, 0}, 
+	{0, 0, 0, 0, 0, 0, 0, 0}
+};
+
+struct maze_map
+{
+	bool west_wall[6][8];
+	bool south_wall[6][8];
+	bool east_wall[6][8];
+	bool north_wall[6][8];
+};
 
 struct maze_storage
 {
 	int maze_value[6][8];
+	bool flag[6][8];
 	int temp_node_N;
 	int temp_node_E;
 	int temp_node_S;
@@ -83,6 +94,7 @@ struct maze_storage
 	bool east_wall[6][8];
 	bool north_wall[6][8];
 	int status_wall;
+	int goal;
 };
 
 struct node
@@ -90,4 +102,11 @@ struct node
 	int current_posX;
 	int current_posY;
 	int lowest_neigh;
+	int steps;
+};
+
+struct history
+{
+	int history_posX[48];
+	int history_posY[48];
 };
