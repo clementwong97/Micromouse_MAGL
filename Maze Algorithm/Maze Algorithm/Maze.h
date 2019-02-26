@@ -84,7 +84,7 @@ struct maze_map
 struct maze_storage
 {
 	int maze_value[6][8];
-	bool flag[6][8];
+	int flag[6][8];
 	int temp_node_N;
 	int temp_node_E;
 	int temp_node_S;

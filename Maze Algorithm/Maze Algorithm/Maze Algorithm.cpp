@@ -11,6 +11,8 @@
 
 void backtrack_update(struct maze_storage *update, struct node *n_update, struct history *h_update);
 
+
+/*Functions to decide the direction of the next move*/
 void next_move_South(struct maze_storage *south, struct node *n_south)
 {
 	int south_x = n_south->current_posX;
@@ -229,7 +231,7 @@ void next_move_ENW(struct maze_storage *enw, struct node *n_enw)
 	int enw_x = n_enw->current_posX;
 	int enw_y = n_enw->current_posY;
 
-	if (enw->temp_node_E < enw->temp_node_N)
+	if (enw->temp_node_E <= enw->temp_node_N)
 	{
 		if (enw->temp_node_E <= enw->temp_node_W)
 		{
@@ -263,7 +265,7 @@ void next_move_ENW(struct maze_storage *enw, struct node *n_enw)
 			printf("New Location: [%d][%d]\n", n_enw->current_posY, n_enw->current_posX);
 		}
 	}
-	if (enw->temp_node_N <= enw->temp_node_E)
+	if (enw->temp_node_N < enw->temp_node_E)
 	{
 		if (enw->temp_node_N <= enw->temp_node_W)
 		{
@@ -287,7 +289,7 @@ void next_move_EN(struct maze_storage *en, struct node *n_en)
 	int en_x = n_en->current_posX;
 	int en_y = n_en->current_posY;
 
-	if (en->temp_node_N <= en->temp_node_E)
+	if (en->temp_node_N < en->temp_node_E)
 	{
 		//if current cell isn't more than or equal to minimum neighbour + 1
 		if (en->maze_value[en_y][en_x] <= (en->temp_node_N + 1))
@@ -301,7 +303,7 @@ void next_move_EN(struct maze_storage *en, struct node *n_en)
 		en->flag[n_en->current_posY][n_en->current_posX] = 1;
 		printf("New Location: [%d][%d]\n", n_en->current_posY, n_en->current_posX);
 	}
-	if (en->temp_node_E < en->temp_node_N)
+	if (en->temp_node_E <= en->temp_node_N)
 	{
 		//if current cell isn't more than or equal to minimum neighbour + 1
 		if (en->maze_value[en_y][en_x] <= (en->temp_node_E + 1))
@@ -611,7 +613,7 @@ void next_move_SW(struct maze_storage *sw, struct node *n_sw)
 	}
 }
 
-
+/**/
 void check_walls(struct maze_storage *wall, struct node *n_walls)
 {
 	printf("Check Wall Location......\n\n");
@@ -660,6 +662,7 @@ void check_walls(struct maze_storage *wall, struct node *n_walls)
 	}
 }
 
+/*check the sensors for obstacle and clear paths when at that particular cell*/
 void check_sensors(struct maze_storage *wall_sensors, struct node *n_sensors, struct maze_map *map)
 {
 	int n_x = n_sensors->current_posX;
@@ -679,6 +682,7 @@ void check_sensors(struct maze_storage *wall_sensors, struct node *n_sensors, st
 
 }
 
+/*store the maze information in the stack (cell values and history flag)*/
 void store_maze_data(struct maze_storage *data)
 {
 	for (int x = 0; x < 8; x++)
@@ -1048,10 +1052,11 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 			}
 		}
 	}
+	//
 	else if (check->status_wall == WALL_EN)
 	{
 		//check if the robot has been through East path
-		if (check->flag[check_y][check_x + 1] == 1)
+		if (check->flag[check_y][check_x + 1] > 1)
 		{
 			//check if the robot has been through North Path
 			if (check->flag[check_y - 1][check_x] == 0)
@@ -1063,7 +1068,7 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 		else
 		{
 			//check if the robot has been through North Path
-			if (check->flag[check_y - 1][check_x] == 1)
+			if (check->flag[check_y - 1][check_x] > 1)
 			{
 				//move to East Path
 				next_move_East(check, n_check);
@@ -1310,11 +1315,12 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 			}
 		}
 	}
+	//
 	else if (check->status_wall == WALL_SW)
 	{
 		printf("Debug SW....\n");
 		//check if the robot has been through West path
-		if (check->flag[check_y][check_x - 1] == 1)
+		if (check->flag[check_y][check_x - 1] > 1)
 		{
 			printf("<----- Check West path\n");
 			printf("South flag: %d...\n", check->flag[check_y + 1][check_x]);
@@ -1330,7 +1336,7 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 		{
 			printf("<----- Check else West path\n");
 			//check if the robot has been through South Path
-			if (check->flag[check_y + 1][check_x] == 1)
+			if (check->flag[check_y + 1][check_x] > 1)
 			{
 				//move to West Path
 				next_move_West(check, n_check);
@@ -1735,6 +1741,7 @@ int main(void)
 		//function to compare the wall status and lowest distance value
 		next_move(&cell_data, &node_data, &history_data);
 
+		//function to check present cell value = open cell value + 1 (if no, update + 1)
 		backtrack_update(&cell_data, &node_data, &history_data);
 
 		printf("Current cell value: %d\n", cell_data.maze_value[node_data.current_posY][node_data.current_posX]);
@@ -1744,6 +1751,11 @@ int main(void)
 
 		node_data.steps++;
 		printf("Number of Steps: %d \n", node_data.steps);
+
+		if (cell_data.goal == 0)
+		{
+			printf("GOALLLLLLL!!!!.....\n");
+		}
 	}
 
 	return 0;
