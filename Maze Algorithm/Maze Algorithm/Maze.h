@@ -109,4 +109,5 @@ struct history
 {
 	int history_posX[48];
 	int history_posY[48];
+	int mini_close;
 };
