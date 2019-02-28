@@ -13,19 +13,16 @@ void backtrack_update(struct maze_storage *update, struct node *n_update, struct
 
 
 /*Functions to decide the direction of the next move*/
-void next_move_South(struct maze_storage *south, struct node *n_south, struct history *h_south)
+void next_move_South(struct maze_storage *south, struct node *n_south)
 {
 	int south_x = n_south->current_posX;
 	int south_y = n_south->current_posY;
-	h_south->mini_close = south->temp_node_S;
 	//if current cell isn't more than or equal to minimum neighbour + 1
 	if (south->maze_value[south_y][south_x] <= (south->temp_node_S + 1))
 	{
-		//south->maze_value[south_y][south_x] = south->temp_node_S + 1;
+		south->maze_value[south_y][south_x] = south->temp_node_S + 1;
 		//backtrack_update(south, n_south, n_history);
-		//function to check present cell value = open cell value + 1 (if no, update + 1)
-		backtrack_update(south, n_south, h_south);
-	}	
+	}
 	//move to South Cell
 	printf("Move to South Cell. \n");
 	n_south->current_posY++;
@@ -33,16 +30,15 @@ void next_move_South(struct maze_storage *south, struct node *n_south, struct hi
 	printf("New Location: [%d][%d]\n", n_south->current_posY, n_south->current_posX);
 }
 
-void next_move_West(struct maze_storage *west, struct node *n_west, struct history *h_west)
+void next_move_West(struct maze_storage *west, struct node *n_west)
 {
 	int west_x = n_west->current_posX;
 	int west_y = n_west->current_posY;
-	h_west->mini_close = west->temp_node_W;
 	//if current cell isn't more than or equal to minimum neighbour + 1
 	if (west->maze_value[west_y][west_x] <= (west->temp_node_W + 1))
 	{
-		//west->maze_value[west_y][west_x] = west->temp_node_W + 1;
-		backtrack_update(west, n_west, h_west);
+		west->maze_value[west_y][west_x] = west->temp_node_W + 1;
+		//backtrack_update(west, n_west, n_history);
 	}
 	//move to West Cell
 	printf("Move to West Cell. \n");
@@ -51,16 +47,15 @@ void next_move_West(struct maze_storage *west, struct node *n_west, struct histo
 	printf("New Location: [%d][%d]\n", n_west->current_posY, n_west->current_posX);
 }
 
-void next_move_North(struct maze_storage *north, struct node *n_north, struct history *h_north)
+void next_move_North(struct maze_storage *north, struct node *n_north)
 {
 	int north_x = n_north->current_posX;
 	int north_y = n_north->current_posY;
-	h_north->mini_close = north->temp_node_N;
 	//if current cell isn't more than or equal to minimum neighbour + 1
-	if (north->maze_value[north_y][north_x] <= (north->temp_node_N + 1))
+	if (north->maze_value[north_y][north_x] <= (north->temp_node_W + 1))
 	{
-		//north->maze_value[north_y][north_x] = north->temp_node_W + 1;
-		backtrack_update(north, n_north, h_north);
+		north->maze_value[north_y][north_x] = north->temp_node_W + 1;
+		//backtrack_update(north, n_north, n_history);
 	}
 	//move to North Cell
 	printf("Move to North Cell. \n");
@@ -69,16 +64,15 @@ void next_move_North(struct maze_storage *north, struct node *n_north, struct hi
 	printf("New Location: [%d][%d]\n", n_north->current_posY, n_north->current_posX);
 }
 
-void next_move_East(struct maze_storage *east, struct node *n_east, struct history *h_east)
+void next_move_East(struct maze_storage *east, struct node *n_east)
 {
 	int east_x = n_east->current_posX;
 	int east_y = n_east->current_posY;
-	h_east->mini_close = east->temp_node_E;
 	//if current cell isn't more than or equal to minimum neighbour + 1
-	if (east->maze_value[east_y][east_x] <= (east->temp_node_E + 1))
+	if (east->maze_value[east_y][east_x] <= (east->temp_node_W + 1))
 	{
-		//east->maze_value[east_y][east_x] = east->temp_node_W + 1;
-		backtrack_update(east, n_east, h_east);
+		east->maze_value[east_y][east_x] = east->temp_node_W + 1;
+		//backtrack_update(east, n_east, n_history);
 	}
 	//move to East Cell
 	printf("Move to East Cell. \n");
@@ -87,12 +81,12 @@ void next_move_East(struct maze_storage *east, struct node *n_east, struct histo
 	printf("New Location: [%d][%d]\n", n_east->current_posY, n_east->current_posX);
 }
 
-void next_move_No(struct maze_storage *no, struct node *n_no, struct history *h_no)
+void next_move_No(struct maze_storage *no, struct node *n_no)
 {
 	int no_x = n_no->current_posX;
 	int no_y = n_no->current_posY;
 	//check all cells values 
-	if (no->temp_node_E <= no->temp_node_N)
+	if (no->temp_node_E < no->temp_node_N)
 	{
 		if (no->temp_node_E <= no->temp_node_W)
 		{
@@ -101,8 +95,8 @@ void next_move_No(struct maze_storage *no, struct node *n_no, struct history *h_
 				//if current cell isn't more than or equal to minimum neighbour + 1
 				if (no->maze_value[no_y][no_x] <= (no->temp_node_E + 1))
 				{
-					//no->maze_value[no_y][no_x] = no->temp_node_E + 1;
-					backtrack_update(no, n_no, h_no);
+					no->maze_value[no_y][no_x] = no->temp_node_E + 1;
+					//backtrack_update(check, n_check, n_history);
 				}
 				//move to East Cell
 				printf("Move to East Cell. \n");
@@ -121,8 +115,8 @@ void next_move_No(struct maze_storage *no, struct node *n_no, struct history *h_
 				//if current cell isn't more than or equal to minimum neighbour + 1
 				if (no->maze_value[no_y][no_x] <= (no->temp_node_W + 1))
 				{
-					//no->maze_value[no_y][no_x] = no->temp_node_W + 1;
-					backtrack_update(no, n_no, h_no);
+					no->maze_value[no_y][no_x] = no->temp_node_W + 1;
+					//backtrack_update(check, n_check, n_history);
 				}
 				//move to West Cell
 				printf("Move to West Cell. \n");
@@ -141,8 +135,8 @@ void next_move_No(struct maze_storage *no, struct node *n_no, struct history *h_
 				//if current cell isn't more than or equal to minimum neighbour + 1
 				if (no->maze_value[no_y][no_x] <= (no->temp_node_S + 1))
 				{
-					//no->maze_value[no_y][no_x] = no->temp_node_S + 1;
-					backtrack_update(no, n_no, h_no);
+					no->maze_value[no_y][no_x] = no->temp_node_S + 1;
+					//backtrack_update(no, n_no, n_history);
 				}
 				//move to South Cell
 				printf("Move to South Cell. \n");
@@ -152,7 +146,7 @@ void next_move_No(struct maze_storage *no, struct node *n_no, struct history *h_
 			}
 		}
 	}
-	if (no->temp_node_N < no->temp_node_E)
+	if (no->temp_node_N <= no->temp_node_E)
 	{
 		if (no->temp_node_N <= no->temp_node_W)
 		{
@@ -161,8 +155,8 @@ void next_move_No(struct maze_storage *no, struct node *n_no, struct history *h_
 				//if current cell isn't more than or equal to minimum neighbour + 1
 				if (no->maze_value[no_y][no_x] <= (no->temp_node_N + 1))
 				{
-					//no->maze_value[no_y][no_x] = no->temp_node_N + 1;
-					backtrack_update(no, n_no, h_no);
+					no->maze_value[no_y][no_x] = no->temp_node_N + 1;
+					//backtrack_update(no, n_no, n_history);
 				}
 				//move to North Cell
 				printf("Move to North Cell. \n");
@@ -174,20 +168,20 @@ void next_move_No(struct maze_storage *no, struct node *n_no, struct history *h_
 	}
 }
 
-void next_move_ENS(struct maze_storage *ens, struct node *n_ens, struct history *h_ens)
+void next_move_ENS(struct maze_storage *ens, struct node *n_ens )
 {
 	int ens_x = n_ens->current_posX;
 	int ens_y = n_ens->current_posY;
 
-	if (ens->temp_node_E <= ens->temp_node_N)
+	if (ens->temp_node_E < ens->temp_node_N)
 	{
 		if (ens->temp_node_E <= ens->temp_node_S)
 		{
 			//if current cell isn't more than or equal to minimum neighbour + 1
 			if (ens->maze_value[ens_y][ens_x] <= (ens->temp_node_E + 1))
 			{
-				//ens->maze_value[ens_y][ens_x] = ens->temp_node_E + 1;
-				backtrack_update(ens, n_ens, h_ens);
+				ens->maze_value[ens_y][ens_x] = ens->temp_node_E + 1;
+				//backtrack_update(ens, n_ens, n_history);
 			}
 			//move to East Cell
 			printf("Move to East Cell. \n");
@@ -203,8 +197,8 @@ void next_move_ENS(struct maze_storage *ens, struct node *n_ens, struct history 
 			//if current cell isn't more than or equal to minimum neighbour + 1
 			if (ens->maze_value[ens_y][ens_x] <= (ens->temp_node_S + 1))
 			{
-				//ens->maze_value[ens_y][ens_x] = ens->temp_node_S + 1;
-				backtrack_update(ens, n_ens, h_ens);
+				ens->maze_value[ens_y][ens_x] = ens->temp_node_S + 1;
+				//backtrack_update(ens, n_ens, n_history);
 			}
 			//move to South Cell
 			printf("Move to South Cell. \n");
@@ -213,15 +207,15 @@ void next_move_ENS(struct maze_storage *ens, struct node *n_ens, struct history 
 			printf("New Location: [%d][%d]\n", n_ens->current_posY, n_ens->current_posX);	
 		}
 	}
-	else if (ens->temp_node_N < ens->temp_node_E)
+	else if (ens->temp_node_N <= ens->temp_node_E)
 	{
 		if (ens->temp_node_N <= ens->temp_node_S)
 		{
 			//if current cell isn't more than or equal to minimum neighbour + 1
 			if (ens->maze_value[ens_y][ens_x] <= (ens->temp_node_N + 1))
 			{
-				//ens->maze_value[ens_y][ens_x] = ens->temp_node_N + 1;
-				backtrack_update(ens, n_ens, h_ens);
+				ens->maze_value[ens_y][ens_x] = ens->temp_node_N + 1;
+				//backtrack_update(ens, n_ens, n_history);
 			}
 			//move to North Cell
 			printf("Move to North Cell. \n");
@@ -232,7 +226,7 @@ void next_move_ENS(struct maze_storage *ens, struct node *n_ens, struct history 
 	}
 }
 
-void next_move_ENW(struct maze_storage *enw, struct node *n_enw, struct history *h_enw)
+void next_move_ENW(struct maze_storage *enw, struct node *n_enw)
 {
 	int enw_x = n_enw->current_posX;
 	int enw_y = n_enw->current_posY;
@@ -244,8 +238,8 @@ void next_move_ENW(struct maze_storage *enw, struct node *n_enw, struct history 
 			//if current cell isn't more than or equal to minimum neighbour + 1
 			if (enw->maze_value[enw_y][enw_x] <= (enw->temp_node_E + 1))
 			{
-				//enw->maze_value[enw_y][enw_x] = enw->temp_node_E + 1;
-				backtrack_update(enw, n_enw, h_enw);
+				enw->maze_value[enw_y][enw_x] = enw->temp_node_E + 1;
+				//backtrack_update(enw, n_enw, n_history);
 			}
 			//move to East Cell
 			printf("Move to East Cell. \n");
@@ -261,8 +255,8 @@ void next_move_ENW(struct maze_storage *enw, struct node *n_enw, struct history 
 			//if current cell isn't more than or equal to minimum neighbour + 1
 			if (enw->maze_value[enw_y][enw_x] <= (enw->temp_node_W + 1))
 			{
-				//enw->maze_value[enw_y][enw_x] = enw->temp_node_W + 1;
-				backtrack_update(enw, n_enw, h_enw);
+				enw->maze_value[enw_y][enw_x] = enw->temp_node_W + 1;
+				//backtrack_update(enw, n_enw, n_history);
 			}
 			//move to West Cell
 			printf("Move to West Cell. \n");
@@ -278,8 +272,8 @@ void next_move_ENW(struct maze_storage *enw, struct node *n_enw, struct history 
 			//if current cell isn't more than or equal to minimum neighbour + 1
 			if (enw->maze_value[enw_y][enw_x] <= (enw->temp_node_N + 1))
 			{
-				//enw->maze_value[enw_y][enw_x] = enw->temp_node_N + 1;
-				backtrack_update(enw, n_enw, h_enw);
+				enw->maze_value[enw_y][enw_x] = enw->temp_node_N + 1;
+				//backtrack_update(enw, n_enw, n_history);
 			}
 			//move to North Cell
 			printf("Move to North Cell. \n");
@@ -290,7 +284,7 @@ void next_move_ENW(struct maze_storage *enw, struct node *n_enw, struct history 
 	}
 }
 
-void next_move_EN(struct maze_storage *en, struct node *n_en, struct history *h_en)
+void next_move_EN(struct maze_storage *en, struct node *n_en)
 {
 	int en_x = n_en->current_posX;
 	int en_y = n_en->current_posY;
@@ -300,8 +294,8 @@ void next_move_EN(struct maze_storage *en, struct node *n_en, struct history *h_
 		//if current cell isn't more than or equal to minimum neighbour + 1
 		if (en->maze_value[en_y][en_x] <= (en->temp_node_N + 1))
 		{
-			//en->maze_value[en_y][en_x] = en->temp_node_N + 1;
-			backtrack_update(en, n_en, h_en);
+			en->maze_value[en_y][en_x] = en->temp_node_N + 1;
+			//backtrack_update(en, n_en, n_history);
 		}
 		//move to North Cell
 		printf("Move to North Cell. \n");
@@ -314,8 +308,8 @@ void next_move_EN(struct maze_storage *en, struct node *n_en, struct history *h_
 		//if current cell isn't more than or equal to minimum neighbour + 1
 		if (en->maze_value[en_y][en_x] <= (en->temp_node_E + 1))
 		{
-			//en->maze_value[en_y][en_x] = en->temp_node_E + 1;
-			backtrack_update(en, n_en, h_en);
+			en->maze_value[en_y][en_x] = en->temp_node_E + 1;
+			//backtrack_update(en, n_en, n_history);
 		}	
 		//move to East Cell
 		printf("Move to East Cell. \n");
@@ -325,7 +319,7 @@ void next_move_EN(struct maze_storage *en, struct node *n_en, struct history *h_
 	}
 }
 
-void next_move_ESW(struct maze_storage *esw, struct node *n_esw, struct history *h_esw)
+void next_move_ESW(struct maze_storage *esw, struct node *n_esw)
 {
 	int esw_x = n_esw->current_posX;
 	int esw_y = n_esw->current_posY;
@@ -337,8 +331,8 @@ void next_move_ESW(struct maze_storage *esw, struct node *n_esw, struct history 
 			//if current cell isn't more than or equal to minimum neighbour + 1
 			if (esw->maze_value[esw_y][esw_x] <= (esw->temp_node_E + 1))
 			{
-				//esw->maze_value[esw_y][esw_x] = esw->temp_node_E + 1;
-				backtrack_update(esw, n_esw, h_esw);
+				esw->maze_value[esw_y][esw_x] = esw->temp_node_E + 1;
+				//backtrack_update(esw, n_esw, n_history);
 			}
 			//move to East Cell
 			printf("Move to East Cell. \n");
@@ -354,8 +348,8 @@ void next_move_ESW(struct maze_storage *esw, struct node *n_esw, struct history 
 			//if current cell isn't more than or equal to minimum neighbour + 1
 			if (esw->maze_value[esw_y][esw_x] <= (esw->temp_node_W + 1))
 			{
-				//esw->maze_value[esw_y][esw_x] = esw->temp_node_W + 1;
-				backtrack_update(esw, n_esw, h_esw);
+				esw->maze_value[esw_y][esw_x] = esw->temp_node_W + 1;
+				//backtrack_update(esw, n_esw, n_history);
 			}
 			//move to West Cell
 			printf("Move to West Cell. \n");
@@ -371,8 +365,8 @@ void next_move_ESW(struct maze_storage *esw, struct node *n_esw, struct history 
 			//if current cell isn't more than or equal to minimum neighbour + 1
 			if (esw->maze_value[esw_y][esw_x] <= (esw->temp_node_S + 1))
 			{
-				//esw->maze_value[esw_y][esw_x] = esw->temp_node_S + 1;
-				backtrack_update(esw, n_esw, h_esw);
+				esw->maze_value[esw_y][esw_x] = esw->temp_node_S + 1;
+				//backtrack_update(esw, n_esw, n_history);
 			}
 			//move to South Cell
 			printf("Move to South Cell. \n");
@@ -383,7 +377,7 @@ void next_move_ESW(struct maze_storage *esw, struct node *n_esw, struct history 
 	}
 }
 
-void next_move_ES(struct maze_storage *es, struct node *n_es, struct history *h_es)
+void next_move_ES(struct maze_storage *es, struct node *n_es)
 {
 	int es_x = n_es->current_posX;
 	int es_y = n_es->current_posY;
@@ -393,8 +387,8 @@ void next_move_ES(struct maze_storage *es, struct node *n_es, struct history *h_
 		//if current cell isn't more than or equal to minimum neighbour + 1
 		if (es->maze_value[es_y][es_x] <= (es->temp_node_E + 1))
 		{
-			//es->maze_value[es_y][es_x] = es->temp_node_E + 1;
-			backtrack_update(es, n_es, h_es);
+			es->maze_value[es_y][es_x] = es->temp_node_E + 1;
+			//backtrack_update(es, n_es, n_history);
 		}
 		//move to East Cell
 		printf("Move to East Cell. \n");
@@ -407,8 +401,8 @@ void next_move_ES(struct maze_storage *es, struct node *n_es, struct history *h_
 		//if current cell isn't more than or equal to minimum neighbour + 1
 		if (es->maze_value[es_y][es_x] <= (es->temp_node_S + 1))
 		{
-			//es->maze_value[es_y][es_x] = es->temp_node_S + 1;
-			backtrack_update(es, n_es, h_es);
+			es->maze_value[es_y][es_x] = es->temp_node_S + 1;
+			//backtrack_update(es, n_es, n_history);
 		}
 		//move to South Cell
 		printf("Move to South Cell. \n");
@@ -418,7 +412,7 @@ void next_move_ES(struct maze_storage *es, struct node *n_es, struct history *h_
 	}
 }
 
-void next_move_EW(struct maze_storage *ew, struct node *n_ew, struct history *h_ew)
+void next_move_EW(struct maze_storage *ew, struct node *n_ew)
 {
 	int ew_x = n_ew->current_posX;
 	int ew_y = n_ew->current_posY;
@@ -428,8 +422,8 @@ void next_move_EW(struct maze_storage *ew, struct node *n_ew, struct history *h_
 		//if current cell isn't more than or equal to minimum neighbour + 1
 		if (ew->maze_value[ew_y][ew_x] <= (ew->temp_node_E + 1))
 		{
-			//ew->maze_value[ew_y][ew_x] = ew->temp_node_E + 1;
-			backtrack_update(ew, n_ew, h_ew);
+			ew->maze_value[ew_y][ew_x] = ew->temp_node_E + 1;
+			//backtrack_update(ew, n_ew, n_history);
 		}
 		//move to East Cell
 		printf("Move to East Cell. \n");
@@ -443,8 +437,8 @@ void next_move_EW(struct maze_storage *ew, struct node *n_ew, struct history *h_
 		//if current cell isn't more than or equal to minimum neighbour + 1
 		if (ew->maze_value[ew_y][ew_x] <= (ew->temp_node_W + 1))
 		{
-			//ew->maze_value[ew_y][ew_x] = ew->temp_node_W + 1;
-			backtrack_update(ew, n_ew, h_ew);
+			ew->maze_value[ew_y][ew_x] = ew->temp_node_W + 1;
+			//backtrack_update(ew, n_ew, n_history);
 		}
 		//move to West Cell
 		printf("Move to West Cell. \n");
@@ -454,7 +448,7 @@ void next_move_EW(struct maze_storage *ew, struct node *n_ew, struct history *h_
 	}
 }
 
-void next_move_NSW(struct maze_storage *nsw, struct node *n_nsw, struct history *h_nsw)
+void next_move_NSW(struct maze_storage *nsw, struct node *n_nsw)
 {
 	int nsw_x = n_nsw->current_posX;
 	int nsw_y = n_nsw->current_posY;
@@ -467,8 +461,8 @@ void next_move_NSW(struct maze_storage *nsw, struct node *n_nsw, struct history 
 			//if current cell isn't more than or equal to minimum neighbour + 1
 			if (nsw->maze_value[nsw_y][nsw_x] <= (nsw->temp_node_N + 1))
 			{
-				//nsw->maze_value[nsw_y][nsw_x] = (nsw->temp_node_W) + 1;
-				backtrack_update(nsw, n_nsw, h_nsw);
+				nsw->maze_value[nsw_y][nsw_x] = (nsw->temp_node_W) + 1;
+				//backtrack_update(nsw, n_nsw, n_history);
 			}
 			printf("Move to North Cell. \n");
 			n_nsw->current_posY--;
@@ -484,8 +478,8 @@ void next_move_NSW(struct maze_storage *nsw, struct node *n_nsw, struct history 
 			//if current cell isn't more than or equal to minimum neighbour + 1
 			if (nsw->maze_value[nsw_y][nsw_x] <= (nsw->temp_node_W + 1))
 			{
-				//nsw->maze_value[nsw_y][nsw_x] = (nsw->temp_node_W) + 1;
-				backtrack_update(nsw, n_nsw, h_nsw);
+				nsw->maze_value[nsw_y][nsw_x] = (nsw->temp_node_W) + 1;
+				//backtrack_update(nsw, n_nsw, n_history);
 			}
 			//move to South Cell
 			printf("Move to West Cell. \n");
@@ -501,8 +495,8 @@ void next_move_NSW(struct maze_storage *nsw, struct node *n_nsw, struct history 
 			//if current cell isn't more than or equal to minimum neighbour + 1
 			if (nsw->maze_value[nsw_y][nsw_x] <= (nsw->temp_node_S + 1))
 			{
-				//nsw->maze_value[nsw_y][nsw_x] = (nsw->temp_node_S) + 1;
-				backtrack_update(nsw, n_nsw, h_nsw);
+				nsw->maze_value[nsw_y][nsw_x] = (nsw->temp_node_S) + 1;
+				//backtrack_update(nsw, n_nsw, n_history);
 			}
 			//move to North Cell
 			printf("Move to South Cell. \n");
@@ -513,7 +507,7 @@ void next_move_NSW(struct maze_storage *nsw, struct node *n_nsw, struct history 
 	}
 }
 
-void next_move_NS(struct maze_storage *ns, struct node *n_ns, struct history *h_ns)
+void next_move_NS(struct maze_storage *ns, struct node *n_ns)
 {
 	int ns_x = n_ns->current_posX;
 	int ns_y = n_ns->current_posY;
@@ -523,8 +517,8 @@ void next_move_NS(struct maze_storage *ns, struct node *n_ns, struct history *h_
 		//if current cell isn't more than or equal to minimum neighbour + 1
 		if (ns->maze_value[ns_y][ns_x] <= (ns->temp_node_N + 1))
 		{
-			//ns->maze_value[ns_y][ns_x] = ns->temp_node_N + 1;
-			backtrack_update(ns, n_ns, h_ns);
+			ns->maze_value[ns_y][ns_x] = ns->temp_node_N + 1;
+			//backtrack_update(ns, n_ns, n_history);
 		}
 		//move to North Cell
 		printf("Move to North Cell. \n");
@@ -537,8 +531,8 @@ void next_move_NS(struct maze_storage *ns, struct node *n_ns, struct history *h_
 		//if current cell isn't more than or equal to minimum neighbour + 1
 		if (ns->maze_value[ns_y][ns_x] <= (ns->temp_node_S + 1))
 		{
-			//ns->maze_value[ns_y][ns_x] = ns->temp_node_S + 1;
-			backtrack_update(ns, n_ns, h_ns);
+			ns->maze_value[ns_y][ns_x] = ns->temp_node_S + 1;
+			//backtrack_update(ns, n_ns, n_history);
 		}
 		//move to South Cell
 		printf("Move to South Cell. \n");
@@ -548,7 +542,7 @@ void next_move_NS(struct maze_storage *ns, struct node *n_ns, struct history *h_
 	}
 }
 
-void next_move_NW(struct maze_storage *nw, struct node *n_nw, struct history *h_nw)
+void next_move_NW(struct maze_storage *nw, struct node *n_nw)
 {
 	int nw_x = n_nw->current_posX;
 	int nw_y = n_nw->current_posY;
@@ -558,8 +552,8 @@ void next_move_NW(struct maze_storage *nw, struct node *n_nw, struct history *h_
 		//if current cell isn't more than or equal to minimum neighbour + 1
 		if (nw->maze_value[nw_y][nw_x] <= (nw->temp_node_N + 1))
 		{
-			//nw->maze_value[nw_y][nw_x] = nw->temp_node_N + 1;
-			backtrack_update(nw, n_nw, h_nw);
+			nw->maze_value[nw_y][nw_x] = nw->temp_node_N + 1;
+			//backtrack_update(nw, n_nw, n_history);
 		}
 		//move to North Cell
 		printf("Move to North Cell. \n");
@@ -572,8 +566,8 @@ void next_move_NW(struct maze_storage *nw, struct node *n_nw, struct history *h_
 		//if current cell isn't more than or equal to minimum neighbour + 1
 		if (nw->maze_value[nw_y][nw_x] <= (nw->temp_node_W + 1))
 		{
-			//nw->maze_value[nw_y][nw_x] = nw->temp_node_W + 1;
-			backtrack_update(nw, n_nw, h_nw);
+			nw->maze_value[nw_y][nw_x] = nw->temp_node_W + 1;
+			//backtrack_update(nw, n_nw, n_history);
 		}
 		//move to West Cell
 		printf("Move to West Cell. \n");
@@ -583,7 +577,7 @@ void next_move_NW(struct maze_storage *nw, struct node *n_nw, struct history *h_
 	}
 }
 
-void next_move_SW(struct maze_storage *sw, struct node *n_sw, struct history *h_sw)
+void next_move_SW(struct maze_storage *sw, struct node *n_sw)
 {
 	int sw_x = n_sw->current_posX;
 	int sw_y = n_sw->current_posY;
@@ -593,8 +587,8 @@ void next_move_SW(struct maze_storage *sw, struct node *n_sw, struct history *h_
 		//if current cell isn't more than or equal to minimum neighbour + 1
 		if (sw->maze_value[sw_y][sw_x] <= (sw->temp_node_W + 1))
 		{
-			//sw->maze_value[sw_y][sw_x] = sw->temp_node_W + 1;
-			backtrack_update(sw, n_sw, h_sw);
+			sw->maze_value[sw_y][sw_x] = sw->temp_node_W + 1;
+			//backtrack_update(sw, n_sw, n_history);
 		}
 		//move to West Cell
 		printf("Move to West Cell. \n");
@@ -608,8 +602,8 @@ void next_move_SW(struct maze_storage *sw, struct node *n_sw, struct history *h_
 		//if current cell isn't more than or equal to minimum neighbour + 1
 		if (sw->maze_value[sw_y][sw_x] <= (sw->temp_node_S + 1))
 		{
-			//sw->maze_value[sw_y][sw_x] = sw->temp_node_S + 1;
-			backtrack_update(sw, n_sw, h_sw);
+			sw->maze_value[sw_y][sw_x] = sw->temp_node_S + 1;
+			//backtrack_update(sw, n_sw, n_history);
 		}
 		//move to south cell
 		printf("Move to South Cell. \n");
@@ -799,7 +793,7 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 					if (check->flag[check_y + 1][check_x] == 0)
 					{
 						//go to South
-						next_move_South(check, n_check, n_history);
+						next_move_South(check, n_check);
 					}
 				}
 				//No history on West
@@ -809,13 +803,13 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 					if (check->flag[check_y + 1][check_x] == 1)
 					{
 						//Move West
-						next_move_West(check, n_check, n_history);
+						next_move_West(check, n_check);
 					}
 					//No history on South
 					else
 					{
 						//compare SW values
-						next_move_SW(check, n_check, n_history);
+						next_move_SW(check, n_check);
 					}
 				}
 			}
@@ -829,12 +823,12 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 					if (check->flag[check_y + 1][check_x] == 1)
 					{
 						//Move to north
-						next_move_North(check, n_check, n_history);
+						next_move_North(check, n_check);
 					}
 					else
 					{
 						//NS values
-						next_move_NS(check, n_check, n_history);
+						next_move_NS(check, n_check);
 					}
 				}
 				else
@@ -843,12 +837,12 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 					if (check->flag[check_y + 1][check_x] == 1)
 					{
 						//NW
-						next_move_NW(check, n_check, n_history);
+						next_move_NW(check, n_check);
 					}
 					else
 					{
 						//NSW
-						next_move_NSW(check, n_check, n_history);
+						next_move_NSW(check, n_check);
 					}
 				}
 			}
@@ -866,13 +860,13 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 					if (check->flag[check_y + 1][check_x] == 1)
 					{
 						//go to East
-						next_move_East(check, n_check, n_history);
+						next_move_East(check, n_check);
 					}
 					//No history on south
 					else
 					{
 						//compare ES values
-						next_move_ES(check, n_check, n_history);
+						next_move_ES(check, n_check);
 					}
 				}
 				//No history on West
@@ -882,13 +876,13 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 					if (check->flag[check_y + 1][check_x] == 1)
 					{
 						//compare EW values
-						next_move_EW(check, n_check, n_history);
+						next_move_EW(check, n_check);
 					}
 					//No history on South
 					else
 					{
 						//compare ESW values
-						next_move_ESW(check, n_check, n_history);
+						next_move_ESW(check, n_check);
 					}
 				}
 			}
@@ -902,12 +896,12 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 					if (check->flag[check_y + 1][check_x] == 1)
 					{
 						//EN values
-						next_move_EN(check, n_check, n_history);
+						next_move_EN(check, n_check);
 					}
 					else
 					{
 						//ENS values
-						next_move_ENS(check, n_check, n_history);
+						next_move_ENS(check, n_check);
 					}
 				}
 				else
@@ -916,12 +910,12 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 					if (check->flag[check_y + 1][check_x] == 1)
 					{
 						//ENW
-						next_move_ENW(check, n_check, n_history);
+						next_move_ENW(check, n_check);
 					}
 					else
 					{
 						//All
-						next_move_No(check, n_check, n_history);
+						next_move_No(check, n_check);
 					}
 				}
 			}
@@ -940,7 +934,7 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 				if (check->flag[check_y + 1][check_x] == 0)
 				{
 					//go to South
-					next_move_South(check, n_check, n_history);
+					next_move_South(check, n_check);
 				}
 			}
 			//No history on North Path
@@ -950,12 +944,12 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 				if (check->flag[check_y + 1][check_x] == 1)
 				{
 					//go to north
-					next_move_North(check, n_check, n_history);
+					next_move_North(check, n_check);
 				}
 				else
 				{
 					//NS values
-					next_move_NS(check, n_check, n_history);
+					next_move_NS(check, n_check);
 				}
 			}
 		}
@@ -969,12 +963,12 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 				if (check->flag[check_y + 1][check_x] == 1)
 				{
 					//Go to East
-					next_move_East(check, n_check, n_history);
+					next_move_East(check, n_check);
 				}
 				else
 				{
 					//ES values
-					next_move_ES(check, n_check, n_history);
+					next_move_ES(check, n_check);
 				}
 			}
 			//No history on North Path
@@ -984,12 +978,12 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 				if (check->flag[check_y + 1][check_x] == 1)
 				{
 					//EN
-					next_move_EN(check, n_check, n_history);
+					next_move_EN(check, n_check);
 				}
 				else
 				{
 					//ENS values
-					next_move_ENS(check, n_check, n_history);
+					next_move_ENS(check, n_check);
 				}
 			}
 		}
@@ -1007,7 +1001,7 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 				if (check->flag[check_y][check_x - 1] == 0)
 				{
 					//go to West
-					next_move_West(check, n_check, n_history);
+					next_move_West(check, n_check);
 				}
 			}
 			//No history on North Path
@@ -1017,12 +1011,12 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 				if (check->flag[check_y][check_x - 1] == 1)
 				{
 					//go to north
-					next_move_North(check, n_check, n_history);
+					next_move_North(check, n_check);
 				}
 				else
 				{
 					//NW values
-					next_move_NW(check, n_check, n_history);
+					next_move_NW(check, n_check);
 				}
 			}
 		}
@@ -1036,12 +1030,12 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 				if (check->flag[check_y][check_x - 1] == 1)
 				{
 					//Go to East
-					next_move_East(check, n_check, n_history);
+					next_move_East(check, n_check);
 				}
 				else
 				{
 					//EW values
-					next_move_EW(check, n_check, n_history);
+					next_move_EW(check, n_check);
 				}
 			}
 			//No history on North Path
@@ -1051,12 +1045,12 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 				if (check->flag[check_y][check_x - 1] == 1)
 				{
 					//EN
-					next_move_EN(check, n_check, n_history);
+					next_move_EN(check, n_check);
 				}
 				else
 				{
 					//ENW values
-					next_move_ENW(check, n_check, n_history);
+					next_move_ENW(check, n_check);
 				}
 			}
 		}
@@ -1071,7 +1065,7 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 			if (check->flag[check_y - 1][check_x] == 0)
 			{
 				//move to north
-				next_move_North(check, n_check, n_history);
+				next_move_North(check, n_check);
 			}
 		}
 		else
@@ -1080,12 +1074,12 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 			if (check->flag[check_y - 1][check_x] > 1)
 			{
 				//move to East Path
-				next_move_East(check, n_check, n_history);
+				next_move_East(check, n_check);
 			}
 			else
 			{
 				//check EN
-				next_move_EN(check, n_check, n_history);
+				next_move_EN(check, n_check);
 			}
 		}
 		
@@ -1103,7 +1097,7 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 				if (check->flag[check_y][check_x - 1] == 0)
 				{
 					//Move to West
-					next_move_West(check, n_check, n_history);
+					next_move_West(check, n_check);
 				}
 			}
 			else
@@ -1112,12 +1106,12 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 				if (check->flag[check_y][check_x - 1] == 1)
 				{
 					//Move to North
-					next_move_North(check, n_check, n_history);
+					next_move_North(check, n_check);
 				}
 				else
 				{
 					//Check NW
-					next_move_NW(check, n_check, n_history);
+					next_move_NW(check, n_check);
 				}
 			}
 		}	
@@ -1130,12 +1124,12 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 				if (check->flag[check_y][check_x - 1] == 1)
 				{
 					//Move to East
-					next_move_East(check, n_check, n_history);
+					next_move_East(check, n_check);
 				}
 				else
 				{
 					//Check EW
-					next_move_EW(check, n_check, n_history);
+					next_move_EW(check, n_check);
 				}
 			}
 			else
@@ -1144,12 +1138,12 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 				if (check->flag[check_y][check_x - 1] == 1)
 				{
 					//Check EN
-					next_move_EN(check, n_check, n_history);
+					next_move_EN(check, n_check);
 				}
 				else
 				{
 					//Check ENW
-					next_move_ENW(check, n_check, n_history);
+					next_move_ENW(check, n_check);
 				}
 			}
 		}			
@@ -1164,7 +1158,7 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 			if (check->flag[check_y + 1][check_x] == 0)
 			{
 				//move to south
-				next_move_South(check, n_check, n_history);
+				next_move_South(check, n_check);
 			}
 		}
 		else
@@ -1173,12 +1167,12 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 			if (check->flag[check_y + 1][check_x] == 1)
 			{
 				//move to East Path
-				next_move_East(check, n_check, n_history);
+				next_move_East(check, n_check);
 			}
 			else
 			{
 				//check ES
-				next_move_ES(check, n_check, n_history);
+				next_move_ES(check, n_check);
 			}
 		}
 	}
@@ -1192,7 +1186,7 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 			if (check->flag[check_y][check_x - 1] == 0)
 			{
 				//move to West
-				next_move_West(check, n_check, n_history);
+				next_move_West(check, n_check);
 			}
 		}
 		else
@@ -1201,12 +1195,12 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 			if (check->flag[check_y][check_x - 1] == 1)
 			{
 				//move to East Path
-				next_move_East(check, n_check, n_history);
+				next_move_East(check, n_check);
 			}
 			else
 			{
 				//check EW
-				next_move_EW(check, n_check, n_history);
+				next_move_EW(check, n_check);
 			}
 		}
 	}
@@ -1223,7 +1217,7 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 				if (check->flag[check_y][check_x - 1] == 0)
 				{
 					//Move to West
-					next_move_West(check, n_check, n_history);
+					next_move_West(check, n_check);
 				}
 			}
 			else
@@ -1232,12 +1226,12 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 				if (check->flag[check_y][check_x - 1] == 1)
 				{
 					//Move to North
-					next_move_North(check, n_check, n_history);
+					next_move_North(check, n_check);
 				}
 				else
 				{
 					//Check NW
-					next_move_NW(check, n_check, n_history);
+					next_move_NW(check, n_check);
 				}
 			}
 		}	
@@ -1250,12 +1244,12 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 				if (check->flag[check_y][check_x - 1] == 1)
 				{
 					//Move to South
-					next_move_South(check, n_check, n_history);
+					next_move_South(check, n_check);
 				}
 				else
 				{
 					//Check SW
-					next_move_SW(check, n_check, n_history);
+					next_move_SW(check, n_check);
 				}
 			}
 			else
@@ -1264,12 +1258,12 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 				if (check->flag[check_y][check_x - 1] == 1)
 				{
 					//Check NS
-					next_move_NS(check, n_check, n_history);
+					next_move_NS(check, n_check);
 				}
 				else
 				{
 					//Check NSW
-					next_move_NSW(check, n_check, n_history);
+					next_move_NSW(check, n_check);
 				}
 			}
 		}
@@ -1284,7 +1278,7 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 			if (check->flag[check_y + 1][check_x] == 0)
 			{
 				//move to south
-				next_move_South(check, n_check, n_history);
+				next_move_South(check, n_check);
 			}
 		}
 		else
@@ -1293,12 +1287,12 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 			if (check->flag[check_y + 1][check_x] == 1)
 			{
 				//move to North Path
-				next_move_North(check, n_check, n_history);
+				next_move_North(check, n_check);
 			}
 			else
 			{
 				//check NS
-				next_move_NS(check, n_check, n_history);
+				next_move_NS(check, n_check);
 			}
 		}
 	}
@@ -1312,7 +1306,7 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 			if (check->flag[check_y][check_x - 1] == 0)
 			{
 				//move to West
-				next_move_West(check, n_check, n_history);
+				next_move_West(check, n_check);
 			}
 		}
 		else
@@ -1321,12 +1315,12 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 			if (check->flag[check_y][check_x - 1] == 1)
 			{
 				//move to North Path
-				next_move_North(check, n_check, n_history);
+				next_move_North(check, n_check);
 			}
 			else
 			{
 				//check NW
-				next_move_NW(check, n_check, n_history);
+				next_move_NW(check, n_check);
 			}
 		}
 	}
@@ -1344,7 +1338,7 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 			{
 				printf("Debug move south...\n");
 				//move to south
-				next_move_South(check, n_check, n_history);
+				next_move_South(check, n_check);
 			}
 		}
 		else
@@ -1354,12 +1348,12 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 			if (check->flag[check_y + 1][check_x] > 1)
 			{
 				//move to West Path
-				next_move_West(check, n_check, n_history);
+				next_move_West(check, n_check);
 			}
 			else
 			{
 				//check SW
-				next_move_SW(check, n_check, n_history);
+				next_move_SW(check, n_check);
 			}
 		}
 	}
@@ -1672,8 +1666,6 @@ void path_history(struct maze_storage *history, struct node *n_history, struct h
 	data->history_posX[a] = n_history->current_posX;
 	data->history_posY[a] = n_history->current_posY;
 
-	printf("Path History: [%d][%d] \n", n_history->current_posY, n_history->current_posX);
-
 	// if (a > 0)
 	// {
 	// 	printf("History Data X: %d\n", data->history_posX[a - 1]);
@@ -1684,46 +1676,38 @@ void path_history(struct maze_storage *history, struct node *n_history, struct h
 
 void backtrack_update(struct maze_storage *update, struct node *n_update, struct history *h_update)
 {
-	// if ((n_update->steps > 0))
-	// {
-	// 	printf("Backtrack_update: %d.........\n", n_update->steps);
-	// 	//every move, the previous cell value should increase as the path continues
-	// 	// for (int i = 0; i < (n_update->steps); i++)
-	// 	// {
-	// 	// 	int x_update = h_update->history_posX[i];
-	// 	// 	int y_update = h_update->history_posY[i];
-	// 	// 	update->maze_value[y_update][x_update]++;
-	// 	// }
-
-	// 	//two step behind
-	// 	int x_1 = h_update->history_posX[n_update->steps - 1];
-	// 	int y_1 = h_update->history_posY[n_update->steps - 1];
-	// 	// //two step behind
-	// 	// int x_2 = h_update->history_posX[n_update->steps - 2];
-	// 	// int y_2 = h_update->history_posY[n_update->steps - 2];
-
-	// 	printf("Test Previous Cell data [%d][%d]: %d  \n", y_1, x_1, update->maze_value[y_1][x_1]);
-	// 	printf("Test Current Cell data [%d][%d]: %d   \n", n_update->current_posY, n_update->current_posX, (update->maze_value[n_update->current_posY][n_update->current_posX]));
-
-	// 	// if ((update->maze_value[n_update->current_posY][n_update->current_posX]) >= (update->maze_value[y_1][x_1]))
-	// 	// {
-	// 	for (int i = 0; i < (n_update->steps - 1); i++)
-	// 	{
-	// 		int x_2 = h_update->history_posX[i];
-	// 		int y_2 = h_update->history_posY[i];
-	// 		update->maze_value[y_2][x_2] = update->maze_value[y_2][x_2] + 1; //((n_update->steps - 1) - i);
-	// 		printf("Updated cell data [%d][%d]: %d  \n", y_2, x_2, update->maze_value[y_2][x_2]);
-	// 	}
-	// 	// } 
-	// }
-	update->maze_value[h_update->history_posY[n_update->steps]][h_update->history_posX[n_update->steps]] = h_update->mini_close + 1;
-
-	for (int i = 0; i < n_update->steps; i++)
+	if ((n_update->steps > 0))
 	{
-		update->maze_value[h_update->history_posY[i]][h_update->history_posX[i]] = (n_update->steps - i) + update->maze_value[h_update->history_posY[n_update->steps]][h_update->history_posX[n_update->steps]];
-		printf("History Maze Value [%d][%d] = %d\n", h_update->history_posY[i], h_update->history_posX[i], update->maze_value[h_update->history_posY[i]][h_update->history_posX[i]]);
-	}
+		printf("Backtrack_update: %d.........\n", n_update->steps);
+		//every move, the previous cell value should increase as the path continues
+		// for (int i = 0; i < (n_update->steps); i++)
+		// {
+		// 	int x_update = h_update->history_posX[i];
+		// 	int y_update = h_update->history_posY[i];
+		// 	update->maze_value[y_update][x_update]++;
+		// }
 
+		//two step behind
+		int x_1 = h_update->history_posX[n_update->steps - 1];
+		int y_1 = h_update->history_posY[n_update->steps - 1];
+		// //two step behind
+		// int x_2 = h_update->history_posX[n_update->steps - 2];
+		// int y_2 = h_update->history_posY[n_update->steps - 2];
+
+		printf("Test Previous Cell data [%d][%d]: %d  \n", y_1, x_1, update->maze_value[y_1][x_1]);
+		printf("Test Current Cell data [%d][%d]: %d   \n", n_update->current_posY, n_update->current_posX, (update->maze_value[n_update->current_posY][n_update->current_posX]));
+
+		// if ((update->maze_value[n_update->current_posY][n_update->current_posX]) >= (update->maze_value[y_1][x_1]))
+		// {
+		for (int i = 0; i < (n_update->steps - 1); i++)
+		{
+			int x_2 = h_update->history_posX[i];
+			int y_2 = h_update->history_posY[i];
+			update->maze_value[y_2][x_2] = update->maze_value[y_2][x_2] + 1; //((n_update->steps - 1) - i);
+			printf("Updated cell data [%d][%d]: %d  \n", y_2, x_2, update->maze_value[y_2][x_2]);
+		}
+		// } 
+	}
 }
 
 int main(void)
@@ -1750,8 +1734,6 @@ int main(void)
 
 	while (cell_data.goal > 0)
 	{
-		cell_data.flag[node_data.current_posY][node_data.current_posX] = 1;
-		
 		//function to stack cell history
 		path_history(&cell_data, &node_data, &history_data);
 
@@ -1768,6 +1750,9 @@ int main(void)
 		//function to compare the wall status and lowest distance value
 		next_move(&cell_data, &node_data, &history_data);
 
+		//function to check present cell value = open cell value + 1 (if no, update + 1)
+		backtrack_update(&cell_data, &node_data, &history_data);
+
 		printf("Current cell value: %d\n", cell_data.maze_value[node_data.current_posY][node_data.current_posX]);
 		//cell_data.goal = cell_data.maze_value[node_data.current_posY][node_data.current_posX];
 
@@ -1778,12 +1763,6 @@ int main(void)
 
 		if (cell_data.goal == 0)
 		{
-			// for (int j = 0; j < node_data.steps; j++)
-			// {
-			// 	cell_data.maze_value[history_data.history_posY[j]][history_data.history_posX[j]] = cell_data.maze_value[history_data.history_posY[j]][history_data.history_posX[j]] - cell_data.maze_value[history_data.history_posY[node_data.steps]][history_data.history_posX[node_data.steps]];
-			// }
-
-			// print_maze(&cell_data);
 			printf("GOALLLLLLL!!!!.....\n");
 		}
 	}
