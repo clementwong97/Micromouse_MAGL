@@ -784,6 +784,7 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 
 	if (check->status_wall == WALL_NO)
 	{
+		//next_move_No(check, n_check, n_history);
 		//compare and find the smallest of them all
 		//check if the robot has been through East path
 		if (check->flag[check_y][check_x + 1] == 1)
@@ -928,6 +929,7 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 	}
 	else if (check->status_wall == WALL_ENS)
 	{
+		//next_move_ENS(check, n_check, n_history);
 		//check if the robot has been through East path
 		if (check->flag[check_y][check_x + 1] == 1)
 		{
@@ -994,6 +996,7 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 	}
 	else if (check->status_wall == WALL_ENW)
 	{
+		//next_move_ENW(check, n_check, n_history);
 		//check if the robot has been through East path
 		if (check->flag[check_y][check_x + 1] == 1)
 		{
@@ -1058,9 +1061,9 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 			}
 		}
 	}
-	//
 	else if (check->status_wall == WALL_EN)
 	{
+		//next_move_EN(check, n_check, n_history);
 		//check if the robot has been through East path
 		if (check->flag[check_y][check_x + 1] > 1)
 		{
@@ -1089,6 +1092,7 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 	}
 	else if (check->status_wall == WALL_ESW)
 	{
+		//next_move_ESW(check, n_check, n_history);
 		//check if the robot has been through East path
 		if (check->flag[check_y][check_x + 1] == 1)
 		{
@@ -1152,6 +1156,7 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 	}
 	else if (check->status_wall == WALL_ES)
 	{
+		//next_move_ES(check, n_check, n_history);
 		//check if the robot has been through East path
 		if (check->flag[check_y][check_x + 1] == 1)
 		{
@@ -1179,6 +1184,7 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 	}
 	else if (check->status_wall == WALL_EW)
 	{
+		//next_move_EW(check, n_check, n_history);
 		//check if the robot has been through East path
 		if (check->flag[check_y][check_x + 1] == 1)
 		{
@@ -1206,6 +1212,7 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 	}
 	else if (check->status_wall == WALL_NSW)
 	{
+		//next_move_NSW(check, n_check, n_history);
 		//check if the robot has been through South path
 		if (check->flag[check_y + 1][check_x] == 1)
 		{
@@ -1269,6 +1276,7 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 	}
 	else if (check->status_wall == WALL_NS)
 	{
+		//next_move_NS(check, n_check, n_history);
 		//check if the robot has been through North path
 		if (check->flag[check_y - 1][check_x] == 1)
 		{
@@ -1296,6 +1304,7 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 	}
 	else if (check->status_wall == WALL_NW)
 	{
+		//next_move_NW(check, n_check, n_history);
 		//check if the robot has been through North path
 		if (check->flag[check_y - 1][check_x] == 1)
 		{
@@ -1321,9 +1330,9 @@ void check_wall_and_value(struct maze_storage *check, struct node *n_check, stru
 			}
 		}
 	}
-	//
 	else if (check->status_wall == WALL_SW)
 	{
+		//next_move_SW(check, n_check, n_history);
 		printf("Debug SW....\n");
 		//check if the robot has been through West path
 		if (check->flag[check_y][check_x - 1] > 1)
@@ -1760,7 +1769,7 @@ int main(void)
 		next_move(&cell_data, &node_data, &history_data);
 
 		printf("Current cell value: %d\n", cell_data.maze_value[node_data.current_posY][node_data.current_posX]);
-		cell_data.goal = cell_data.maze_value[node_data.current_posY][node_data.current_posX];
+		//cell_data.goal = cell_data.maze_value[node_data.current_posY][node_data.current_posX];
 
 		print_maze(&cell_data); 
 
