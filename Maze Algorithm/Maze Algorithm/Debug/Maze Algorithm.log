@@ -1,5 +1,6 @@
-﻿  Maze Algorithm.cpp
-c:\users\how jin\desktop\work\uwe ee\2nd year\microcontroller lab\micromouse project\micromouse project codes\test\maze algorithm\maze algorithm\maze algorithm.cpp(1364): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+﻿  stdafx.cpp
+  Maze Algorithm.cpp
+c:\users\how jin\desktop\work\uwe ee\2nd year\microcontroller lab\micromouse project\micromouse project codes\test\maze algorithm\maze algorithm\maze algorithm.cpp(1373): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1272): note: see declaration of 'scanf'
   Maze Algorithm.vcxproj -> C:\Users\How Jin\Desktop\Work\UWE EE\2nd Year\Microcontroller Lab\MicroMouse Project\Micromouse Project Codes\Test\Maze Algorithm\Debug\Maze Algorithm.exe
   Maze Algorithm.vcxproj -> C:\Users\How Jin\Desktop\Work\UWE EE\2nd Year\Microcontroller Lab\MicroMouse Project\Micromouse Project Codes\Test\Maze Algorithm\Debug\Maze Algorithm.pdb (Partial PDB)
